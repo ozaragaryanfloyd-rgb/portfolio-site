@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Ozaragaryan Floyd | Web Developer Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --emerald: #2ecc71;
+      --emerald-dark: #059669;
+      --emerald-light: #a7f3d0;
+      --black: #171717;
+      --gray: #222;
+      --accent: #00c6ae;
+      --white: #fff;
+      --nav-bg: rgba(23,23,23,0.94);
+      --radius: 18px;
+      --shadow: 0 8px 32px rgba(46,204,113,0.13);
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+      --glass: rgba(39,39,42,0.6);
+      --border-glass: rgba(46,204,113,0.18);
+    }
+    body {
+      background: linear-gradient(135deg, var(--black) 0%, var(--emerald-dark) 100%);
+      font-family: 'Inter', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      color: var(--white);
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 12px rgba(46,204,113,0.09);
+      padding: 0 8vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+      border-bottom: 1.5px solid var(--border-glass);
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 28px;
+      margin: 0; padding: 0;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--emerald);
+      font-weight: 700;
+      font-size: 1rem;
+      transition: color var(--transition);
+      position: relative;
+      letter-spacing: 0.5px;
+    }
+    nav a::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width var(--transition);
+      position: absolute;
+      bottom: -2px; left: 0;
+    }
+    nav a:hover { color: var(--accent);}
+    nav a:hover::after { width: 100%; }
+    .hero {
+      display: flex;
+      align-items: center;
+      gap: 44px;
+      padding: 80px 8vw 60px 8vw;
+      background: transparent;
+      background: linear-gradient(120deg, var(--black) 70%, var(--emerald-dark) 100%);
+      border-bottom: 1px solid var(--emerald-dark);
+    }
+    .avatar {
+      min-width: 150px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: var(--glass);
+      box-shadow: 0 8px 32px rgba(46,204,113,0.25);
+      object-fit: cover;
+      border: 4px solid var(--emerald);
+      animation: float 3.5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0);}
+      50% { transform: translateY(-12px);}
+      100% { transform: translateY(0);}
+    }
+    .hero-info h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.8rem;
+      margin: 0 0 18px 0;
+      color: var(--emerald-light);
+      font-weight: 700;
+      letter-spacing: 2px;
+      line-height: 1.13;
+      text-shadow: 0 4px 12px rgba(46,204,113,0.18);
+    }
+    .hero-info p {
+      font-size: 1.25rem;
+      color: var(--white);
+      margin: 0 0 18px 0;
+      font-weight: 500;
+      text-shadow: 0 2px 8px rgba(0,198,174,0.13);
+    }
+    .hero-info .btn {
+      display: inline-block;
+      background: var(--emerald);
+      color: var(--black);
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 12px 32px;
+      border-radius: 30px;
+      box-shadow: 0 4px 18px rgba(46,204,113,0.18);
+      text-decoration: none;
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+      letter-spacing: 1px;
+      border: none;
+    }
+    .hero-info .btn:hover {
+      background: var(--accent);
+      color: var(--white);
+      transform: translateY(-2px) scale(1.04);
+    }
+    .section {
+      padding: 42px 8vw;
+    }
+    .section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      color: var(--emerald);
+      margin-bottom: 22px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(46,204,113,0.13);
+    }
+    .skills-list, .hobbies-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .skills-list li {
+      background: linear-gradient(90deg, var(--emerald-dark) 60%, var(--emerald-light) 100%);
+      color: var(--black);
+      font-weight: 600;
+      padding: 11px 28px;
+      border-radius: 22px;
+      font-size: 1.04rem;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(46,204,113,0.12);
+      transition: background var(--transition), transform var(--transition);
+      border: 2px solid var(--emerald);
+    }
+    .skills-list li:hover { background: var(--accent); color: var(--white); transform: scale(1.07);}
+    .hobbies-list li {
+      background: var(--emerald-light);
+      color: var(--emerald-dark);
+      font-weight: 600;
+      padding: 9px 22px;
+      border-radius: 22px;
+      font-size: 1.04rem;
+      box-shadow: 0 2px 8px rgba(46,204,113,0.07);
+      border: 2px solid var(--emerald-dark);
+      transition: background var(--transition), color var(--transition);
+    }
+    .hobbies-list li:hover { background: var(--black); color: var(--emerald-light);}
+    .projects-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+      gap: 32px;
+      margin-top: 16px;
+    }
+    .project-card {
+      background: linear-gradient(140deg, var(--black) 80%, var(--emerald-dark) 100%);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 28px rgba(46,204,113,0.12);
+      padding: 30px 26px;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition), border var(--transition);
+      position: relative;
+      overflow: hidden;
+      min-height: 170px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      opacity: 0;
+      animation: fadeIn 1.2s forwards;
+      border: 2.5px solid var(--emerald-dark);
+    }
+    .project-card img {
+      border-radius: 12px;
+      margin-bottom: 16px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 2px 16px rgba(46,204,113,0.11);
+      border: 2px solid var(--emerald-light);
+      background: var(--white);
+      object-fit: cover;
+      display: block;
+    }
+    .project-card:nth-child(1) { animation-delay: 0.2s;}
+    .project-card:nth-child(2) { animation-delay: 0.4s;}
+    .project-card:nth-child(3) { animation-delay: 0.6s;}
+    .project-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 16px 48px rgba(46,204,113,0.17);
+      background: linear-gradient(140deg, var(--emerald-dark) 30%, var(--black) 100%);
+      border-color: var(--emerald-light);
+    }
+    @keyframes fadeIn {
+      to { opacity: 1;}
+    }
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--emerald-light);
+      margin-bottom: 7px;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(46,204,113,0.13);
+    }
+    .project-desc {
+      color: var(--white);
+      font-size: 1rem;
+      margin-bottom: 12px;
+      opacity: 0.96;
+    }
+    .project-tags {
+      display: flex;
+      gap: 9px;
+      margin-bottom: 12px;
+    }
+    .project-tag {
+      background: var(--emerald-light);
+      color: var(--emerald-dark);
+      padding: 4px 13px;
+      border-radius: 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: 1.5px solid var(--emerald-dark);
+    }
+    .project-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      transition: color var(--transition);
+      letter-spacing: 0.5px;
+    }
+    .project-link:hover { color: var(--emerald-light);}
+    .empty-project {
+      font-style: italic;
+      color: var(--emerald-light);
+      text-align: center;
+      width: 100%;
+      padding: 38px 0;
+      background: none;
+      border: 2px dashed var(--emerald-dark);
+      border-radius: var(--radius);
+    }
+    .contact-section {
+      background: linear-gradient(135deg, var(--black) 80%, var(--emerald-dark) 100%);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 28px rgba(46,204,113,0.10);
+      padding: 38px 32px;
+      margin: 42px 8vw 0 8vw;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      border: 2.5px solid var(--emerald-dark);
+    }
+    .contact-section h2 {
+      margin-bottom: 12px;
+      color: var(--emerald-light);
+      text-shadow: 0 2px 8px rgba(46,204,113,0.13);
+    }
+    .contact-section p {
+      margin: 0 0 10px 0;
+      color: var(--white);
+      font-size: 1.08rem;
+      opacity: 0.94;
+    }
+    .contact-link {
+      color: var(--emerald);
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1.12rem;
+      border-bottom: 2px solid var(--accent);
+      transition: color var(--transition), border-color var(--transition);
+      margin-top: 6px;
+      letter-spacing: 0.5px;
+    }
+    .contact-link:hover {
+      color: var(--accent);
+      border-color: var(--emerald-light);
+      text-decoration: underline;
+    }
+    @media (max-width: 900px) {
+      .hero { flex-direction: column; gap: 14px; text-align: center;}
+      .avatar { margin-bottom: 22px;}
+      .hero-info h1 { font-size: 2.1rem;}
+      .section { padding: 32px 4vw;}
+      .contact-section { padding: 32px 4vw;}
+    }
+    @media (max-width: 600px) {
+      nav { padding: 0 2vw; height: 56px;}
+      .section { padding: 24px 2vw;}
+      .contact-section { padding: 22px 2vw;}
+      .projects-list { grid-template-columns: 1fr;}
+      .project-card img { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div style="font-family:'Montserrat';font-size:1.18rem;font-weight:700;color:var(--emerald-light);letter-spacing:2px;">Ozaragaryan Floyd</div>
+    <ul>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#hobbies">Hobbies</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <section class="hero">
+    <img src="https://avatars.githubusercontent.com/u/15107901?v=4" alt="Ozaragaryan Floyd" class="avatar">
+    <div class="hero-info">
+      <h1>Hi, I'm Ozaragaryan Floyd</h1>
+      <p>Web Developer specializing in Shopify, WordPress, and SEO.<br>
+        <span style="color:var(--emerald);">HTML · CSS · JavaScript · PHP · Liquid</span></p>
+      <a href="#contact" class="btn">Let's Work Together</a>
+    </div>
+  </section>
+  <section class="section" id="skills">
+    <h2>Skills & Technologies</h2>
+    <ul class="skills-list">
+      <li>Shopify</li>
+      <li>WordPress</li>
+      <li>SEO</li>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+      <li>PHP</li>
+      <li>Liquid</li>
+    </ul>
+  </section>
+  <!-- ... (your header, nav, etc. remain unchanged) ... -->
+
+<section class="section" id="projects">
+  <h2>My Projects</h2>
+  <div class="projects-list">
+    <div class="project-card">
+      <div class="slider">
+        <img src="C:\Users\Admin\Pictures\Screenshots\Screenshot 2025-10-06 145044.png" alt="Border Sleep - Screenshot 1" class="slide active">
+        <img src="C:\Users\Admin\Pictures\Screenshots\Screenshot 2025-10-06 150506.png" alt="Border Sleep - Screenshot 2" class="slide">
+        <img src="C:\Users\Admin\Pictures\Screenshots\Screenshot 2025-10-06 150901.png" alt="Border Sleep - Screenshot 3" class="slide">
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+      <div class="project-title">Border Sleep Therapy Solutions</div>
+      <div class="project-tags">
+        <span class="project-tag">Shopify</span>
+        <span class="project-tag">SEO</span>
+        <span class="project-tag">Liquid</span>
+      </div>
+      <div class="project-desc">
+        A professional sleep therapy e-commerce website built on Shopify. Features custom theme development, advanced product filtering, SEO optimization, and responsive design for users seeking CPAP machines and sleep solutions.
+      </div>
+      <a href="https://www.bordersleep.com/" target="_blank" class="project-link">Visit Site</a>
+    </div>
+    <div class="empty-project">
+      I will personally add more projects here soon!<br>
+      <span style="font-size:0.98em;color:var(--emerald);">
+        (Showcase your best work to impress clients!)
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ... (your hobbies and contact section remain unchanged) ... -->
+
+<!-- Add this to the end of your <body> just before </body> -->
+<script>
+  // Simple slider script for the project card
+  document.addEventListener('DOMContentLoaded', function() {
+    const slider = document.querySelector('.slider');
+    const slides = slider.querySelectorAll('.slide');
+    const prevBtn = slider.querySelector('.prev');
+    const nextBtn = slider.querySelector('.next');
+    let current = 0;
+    let timer;
+
+    function showSlide(idx) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === idx);
+        slide.style.display = i === idx ? 'block' : 'none';
+      });
+      current = idx;
+    }
+
+    function nextSlide() {
+      showSlide((current + 1) % slides.length);
+    }
+
+    function prevSlide() {
+      showSlide((current - 1 + slides.length) % slides.length);
+    }
+
+    function startAutoSlide() {
+      timer = setInterval(nextSlide, 3000);
+    }
+
+    function stopAutoSlide() {
+      clearInterval(timer);
+    }
+
+    nextBtn.addEventListener('click', () => {
+      stopAutoSlide();
+      nextSlide();
+      startAutoSlide();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      stopAutoSlide();
+      prevSlide();
+      startAutoSlide();
+    });
+
+    showSlide(current);
+    startAutoSlide();
+
+    slider.addEventListener('mouseenter', stopAutoSlide);
+    slider.addEventListener('mouseleave', startAutoSlide);
+  });
+</script>
+<style>
+  .slider {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 240px;
+    margin-bottom: 18px;
+    overflow: hidden;
+    background: #222;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(46,204,113,0.11);
+    border: 2px solid var(--emerald-light);
+  }
+  .slider img.slide {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: none;
+    transition: opacity 0.6s;
+    border-radius: 12px;
+  }
+  .slider img.active {
+    display: block;
+    opacity: 1;
+  }
+  .slider button.prev,
+  .slider button.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(46,204,113,0.7);
+    color: #fff;
+    border: none;
+    font-size: 2rem;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    z-index: 2;
+    transition: background 0.3s;
+    outline: none;
+  }
+  .slider button.prev:hover,
+  .slider button.next:hover {
+    background: var(--accent);
+  }
+  .slider button.prev {
+    left: 12px;
+  }
+  .slider button.next {
+    right: 12px;
+  }
+</style>
+  <section class="section" id="hobbies">
+    <h2>Hobbies</h2>
+    <ul class="hobbies-list">
+      <li>Listening to worship songs</li>
+      <li>Basketball</li>
+      <li>Volleyball</li>
+    </ul>
+  </section>
+  <section class="contact-section" id="contact">
+    <h2>Contact</h2>
+    <p>Ready to collaborate or have a project in mind?</p>
+    <a href="mailto:your.email@example.com" class="contact-link">your.email@example.com</a>
+    <!-- Replace with your actual email or contact link -->
+  </section>
+</body>
+</html>
