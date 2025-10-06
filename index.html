@@ -523,8 +523,31 @@
 
     /* Small utility tweaks for tap targets */
     a, button { -webkit-tap-highlight-color: rgba(0,0,0,0); }
+section[id] {
+  scroll-margin-top: calc(var(--nav-height) + 20px);
+}
+    
   </style>
 </head>
+
+  <script>
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const targetId = this.getAttribute('href');
+    const target = document.querySelector(targetId);
+    if (!target) return;
+    e.preventDefault();
+
+    const navHeight = document.querySelector('nav').offsetHeight;
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+
+    window.scrollTo({
+      top: targetPosition - navHeight - 15, // adjust 15px gap
+      behavior: 'smooth'
+    });
+  });
+});
+</script>
 <body>
 
   <!-- TOPBAR (sticky) -->
@@ -854,5 +877,6 @@
 
 </body>
 </html>
+
 
 
