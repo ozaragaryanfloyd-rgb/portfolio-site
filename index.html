@@ -1,516 +1,856 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Ozaragaryan Floyd | Web Developer Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ozaragaryan Floyd — Web Developer Portfolio</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Meta -->
+  <meta name="description" content="Ozaragaryan Floyd — Shopify, WordPress & SEO focused Web Developer. Portfolio showcasing projects and skills." />
+
   <style>
-    :root {
+    /* -------------------------
+       Theme variables
+       ------------------------- */
+    :root{
+      --bg-1: #0b0c0e;           /* deep background */
+      --bg-2: #0f1720;           /* secondary */
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.03);
       --emerald: #2ecc71;
-      --emerald-dark: #059669;
-      --emerald-light: #a7f3d0;
-      --black: #171717;
-      --gray: #222;
+      --emerald-deep: #059669;
       --accent: #00c6ae;
-      --white: #fff;
-      --nav-bg: rgba(23,23,23,0.94);
-      --radius: 18px;
-      --shadow: 0 8px 32px rgba(46,204,113,0.13);
-      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
-      --glass: rgba(39,39,42,0.6);
-      --border-glass: rgba(46,204,113,0.18);
+      --muted: #9aa3a8;
+      --card: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-1: 0 8px 30px rgba(2,6,23,0.6);
+      --glass-border: rgba(46,204,113,0.12);
+      --transition: 280ms cubic-bezier(.2,.9,.2,1);
+      --max-width: 1200px;
+      --nav-height: 64px;
     }
-    body {
-      background: linear-gradient(135deg, var(--black) 0%, var(--emerald-dark) 100%);
-      font-family: 'Inter', Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      color: var(--white);
+
+    /* -------------------------
+       Base reset & layout
+       ------------------------- */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:
+        radial-gradient(1100px 600px at 10% 10%, rgba(5,150,105,0.06), transparent 8%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      color: #eaf5ef;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      -webkit-tap-highlight-color: transparent;
     }
-    nav {
+
+    /* Layout container */
+    .container {
+      width: calc(100% - 48px);
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 18px 0 48px 0;
+    }
+
+    /* -------------------------
+       Nav (desktop) + mobile panel
+       ------------------------- */
+    .topbar {
       position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--nav-bg);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 2px 12px rgba(46,204,113,0.09);
-      padding: 0 8vw;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 64px;
-      border-bottom: 1.5px solid var(--border-glass);
+      top: 12px;
+      z-index: 120;
+      display:flex;
+      justify-content:center;
+      padding: 8px 16px;
     }
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 28px;
-      margin: 0; padding: 0;
+
+    nav {
+      width: calc(100% - 24px);
+      max-width: var(--max-width);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:10px 14px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: var(--shadow-1);
+      backdrop-filter: blur(8px) saturate(120%);
+      transition: transform var(--transition), box-shadow var(--transition);
     }
-    nav a {
-      text-decoration: none;
-      color: var(--emerald);
-      font-weight: 700;
-      font-size: 1rem;
-      transition: color var(--transition);
-      position: relative;
-      letter-spacing: 0.5px;
+
+    .brand {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      text-decoration:none;
+      color:var(--emerald);
+      font-weight:700;
+      letter-spacing:1px;
     }
-    nav a::after {
-      content: "";
-      display: block;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: width var(--transition);
-      position: absolute;
-      bottom: -2px; left: 0;
+    .brand .logo {
+      width:44px;
+      height:44px;
+      border-radius:10px;
+      display:inline-grid;
+      place-items:center;
+      font-weight:700;
+      color: #07110d;
+      background: linear-gradient(180deg,var(--emerald) 0%, var(--emerald-deep) 100%);
+      box-shadow: 0 6px 18px rgba(2,6,23,0.5);
+      font-family: 'Montserrat', Inter, sans-serif;
     }
-    nav a:hover { color: var(--accent);}
-    nav a:hover::after { width: 100%; }
-    .hero {
-      display: flex;
-      align-items: center;
-      gap: 44px;
-      padding: 80px 8vw 60px 8vw;
+
+    /* Desktop links */
+    .nav-links {
+      display:flex;
+      gap:18px;
+      list-style:none;
+      margin:0; padding:0;
+      align-items:center;
+    }
+    .nav-links a {
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:600;
+      font-size:0.98rem;
+      padding:8px 10px;
+      border-radius:8px;
+      transition: color var(--transition), background var(--transition), transform var(--transition);
+    }
+    .nav-links a:hover, .nav-links a:focus {
+      color: #eafcf3;
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .cta-ghost {
+      padding:8px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      color:var(--emerald);
       background: transparent;
-      background: linear-gradient(120deg, var(--black) 70%, var(--emerald-dark) 100%);
-      border-bottom: 1px solid var(--emerald-dark);
+      font-weight:700;
+      text-decoration:none;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .cta-ghost:hover { background: rgba(46,204,113,0.06); box-shadow: 0 6px 20px rgba(2,6,23,0.55); transform: translateY(-3px); }
+
+    /* Mobile hamburger */
+    .hamburger {
+      display:none;
+      width:44px;
+      height:44px;
+      border-radius:10px;
+      background: transparent;
+      border:1px solid rgba(255,255,255,0.03);
+      color:var(--muted);
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+    }
+    .hamburger:focus { outline:2px solid rgba(46,204,113,0.12); }
+
+    /* Mobile panel */
+    .mobile-panel {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: min(92%, 360px);
+      height: 100vh;
+      background: linear-gradient(180deg, rgba(11,12,14,0.98), rgba(15,23,32,0.98));
+      box-shadow: -24px 0 60px rgba(2,6,23,0.5);
+      transition: right 360ms cubic-bezier(.2,.9,.2,1);
+      z-index: 200;
+      padding: 28px 18px;
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+    .mobile-panel.open { right: 0; }
+    .mobile-panel .close-btn {
+      width:44px; height:44px; border-radius:10px; border:1px solid rgba(255,255,255,0.03);
+      display:inline-grid; place-items:center; background:transparent; cursor:pointer; color:var(--muted);
+    }
+    .mobile-links { display:flex; flex-direction:column; gap:12px; margin-top:6px; }
+    .mobile-links a { color: #eafcf3; text-decoration:none; font-weight:700; padding:10px; border-radius:8px; background: rgba(255,255,255,0.02); }
+
+    /* -------------------------
+       Hero
+       ------------------------- */
+    .hero {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 28px;
+      align-items: center;
+      padding: 36px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 18px 60px rgba(2,6,23,0.6);
+      backdrop-filter: blur(8px) saturate(120%);
+    }
+
+    /* Avatar */
+    .avatar-wrap {
+      width: 220px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
     }
     .avatar {
-      min-width: 150px;
-      width: 160px;
-      height: 160px;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
-      background: var(--glass);
-      box-shadow: 0 8px 32px rgba(46,204,113,0.25);
+      border: 4px solid rgba(255,255,255,0.06);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 18px 40px rgba(2,6,23,0.6), 0 6px 18px rgba(46,204,113,0.06);
       object-fit: cover;
-      border: 4px solid var(--emerald);
-      animation: float 3.5s ease-in-out infinite;
+      display:block;
+      transition: transform var(--transition), box-shadow var(--transition);
     }
-    @keyframes float {
-      0% { transform: translateY(0);}
-      50% { transform: translateY(-12px);}
-      100% { transform: translateY(0);}
-    }
+    .avatar:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 28px 80px rgba(2,6,23,0.7); }
+
+    /* Hero info */
     .hero-info h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2.8rem;
-      margin: 0 0 18px 0;
-      color: var(--emerald-light);
-      font-weight: 700;
-      letter-spacing: 2px;
-      line-height: 1.13;
-      text-shadow: 0 4px 12px rgba(46,204,113,0.18);
+      margin: 0 0 8px 0;
+      font-family: 'Montserrat', 'Inter', sans-serif;
+      font-size: clamp(1.6rem, 3.4vw, 2.28rem);
+      color: #e9fff4;
+      letter-spacing: 0.6px;
     }
-    .hero-info p {
-      font-size: 1.25rem;
-      color: var(--white);
+    .hero-info p.lead {
       margin: 0 0 18px 0;
+      color: var(--muted);
       font-weight: 500;
-      text-shadow: 0 2px 8px rgba(0,198,174,0.13);
+      font-size: 1.02rem;
     }
-    .hero-info .btn {
-      display: inline-block;
-      background: var(--emerald);
-      color: var(--black);
-      font-size: 1.1rem;
-      font-weight: 700;
-      padding: 12px 32px;
-      border-radius: 30px;
-      box-shadow: 0 4px 18px rgba(46,204,113,0.18);
-      text-decoration: none;
-      transition: background var(--transition), color var(--transition), transform var(--transition);
-      letter-spacing: 1px;
-      border: none;
-    }
-    .hero-info .btn:hover {
-      background: var(--accent);
-      color: var(--white);
-      transform: translateY(-2px) scale(1.04);
-    }
-    .section {
-      padding: 42px 8vw;
-    }
-    .section h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2rem;
+    .skill-inline {
+      display:inline-block;
+      padding:6px 10px;
+      margin-left:4px;
+      border-radius:999px;
+      background: rgba(46,204,113,0.06);
       color: var(--emerald);
-      margin-bottom: 22px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-shadow: 0 2px 8px rgba(46,204,113,0.13);
+      font-weight:700;
+      font-size:0.95rem;
+      border:1px solid rgba(46,204,113,0.06);
     }
-    .skills-list, .hobbies-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      list-style: none;
-      padding: 0;
-      margin: 0;
+
+    .hero-ctas { display:flex; gap:12px; align-items:center; margin-top:8px; flex-wrap:wrap; }
+    .btn-primary {
+      background: linear-gradient(180deg,var(--emerald) 0%, var(--emerald-deep) 100%);
+      color: #06221a;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight:700;
+      border: none;
+      text-decoration:none;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .btn-primary:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 18px 40px rgba(2,6,23,0.7); }
+    .btn-outline {
+      padding: 10px 16px;
+      border-radius: 10px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-weight:600;
+      text-decoration:none;
+    }
+
+    /* -------------------------
+       Sections
+       ------------------------- */
+    section.content-section {
+      margin-top: 26px;
+      padding: 20px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border: 1px solid rgba(255,255,255,0.02);
+    }
+    .section-head {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .section-head h2 {
+      margin:0;
+      font-family:'Montserrat';
+      font-size:1.28rem;
+      color: #eafcf3;
+      letter-spacing:0.6px;
+    }
+    .section-sub {
+      color:var(--muted);
+      font-size:0.96rem;
+    }
+
+    /* Skills list (pills) */
+    .skills-list {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:8px 0 0 0;
+      padding:0;
+      list-style:none;
     }
     .skills-list li {
-      background: linear-gradient(90deg, var(--emerald-dark) 60%, var(--emerald-light) 100%);
-      color: var(--black);
-      font-weight: 600;
-      padding: 11px 28px;
-      border-radius: 22px;
-      font-size: 1.04rem;
-      letter-spacing: 0.5px;
-      box-shadow: 0 2px 8px rgba(46,204,113,0.12);
-      transition: background var(--transition), transform var(--transition);
-      border: 2px solid var(--emerald);
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      background: linear-gradient(90deg, rgba(46,204,113,0.06), rgba(46,204,113,0.03));
+      color: var(--emerald);
+      font-weight:700;
+      font-size:0.95rem;
+      border:1px solid rgba(46,204,113,0.04);
+      min-width: fit-content;
+      transition: transform var(--transition);
     }
-    .skills-list li:hover { background: var(--accent); color: var(--white); transform: scale(1.07);}
-    .hobbies-list li {
-      background: var(--emerald-light);
-      color: var(--emerald-dark);
-      font-weight: 600;
-      padding: 9px 22px;
-      border-radius: 22px;
-      font-size: 1.04rem;
-      box-shadow: 0 2px 8px rgba(46,204,113,0.07);
-      border: 2px solid var(--emerald-dark);
-      transition: background var(--transition), color var(--transition);
-    }
-    .hobbies-list li:hover { background: var(--black); color: var(--emerald-light);}
-    .projects-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
-      gap: 32px;
-      margin-top: 16px;
+    .skills-list li:hover { transform: translateY(-4px); }
+
+    /* Projects grid/cards */
+    .projects-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap:18px;
+      margin-top:10px;
     }
     .project-card {
-      background: linear-gradient(140deg, var(--black) 80%, var(--emerald-dark) 100%);
-      border-radius: var(--radius);
-      box-shadow: 0 8px 28px rgba(46,204,113,0.12);
-      padding: 30px 26px;
-      transition: transform var(--transition), box-shadow var(--transition), background var(--transition), border var(--transition);
-      position: relative;
-      overflow: hidden;
-      min-height: 170px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      opacity: 0;
-      animation: fadeIn 1.2s forwards;
-      border: 2.5px solid var(--emerald-dark);
+      border-radius: 14px;
+      padding: 14px;
+      min-height:160px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 10px 30px rgba(2,6,23,0.55);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      overflow:hidden;
+      position:relative;
     }
-    .project-card img {
-      border-radius: 12px;
-      margin-bottom: 16px;
-      width: 100%;
-      max-width: 400px;
-      box-shadow: 0 2px 16px rgba(46,204,113,0.11);
-      border: 2px solid var(--emerald-light);
-      background: var(--white);
-      object-fit: cover;
-      display: block;
-    }
-    .project-card:nth-child(1) { animation-delay: 0.2s;}
-    .project-card:nth-child(2) { animation-delay: 0.4s;}
-    .project-card:nth-child(3) { animation-delay: 0.6s;}
     .project-card:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 16px 48px rgba(46,204,113,0.17);
-      background: linear-gradient(140deg, var(--emerald-dark) 30%, var(--black) 100%);
-      border-color: var(--emerald-light);
+      transform: translateY(-8px);
+      box-shadow: 0 28px 80px rgba(2,6,23,0.7);
+      border-color: rgba(46,204,113,0.09);
     }
-    @keyframes fadeIn {
-      to { opacity: 1;}
+    .project-media {
+      width:100%;
+      border-radius:10px;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(0,0,0,0.25);
+      border:1px solid rgba(255,255,255,0.02);
     }
-    .project-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--emerald-light);
-      margin-bottom: 7px;
-      letter-spacing: 1px;
-      text-shadow: 0 2px 8px rgba(46,204,113,0.13);
+    .project-media img { width:100%; display:block; object-fit:cover; height:140px; }
+
+    .project-title { font-weight:700; color:#eafcf3; margin:0; font-size:1.05rem; }
+    .project-desc { margin:0; color:var(--muted); font-size:0.95rem; line-height:1.35; }
+    .project-tags { display:flex; gap:8px; flex-wrap:wrap; margin-top:6px; }
+    .tag {
+      padding:6px 10px;
+      border-radius:10px;
+      background: rgba(255,255,255,0.02);
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,0.02);
+      font-weight:600;
+      font-size:0.88rem;
     }
-    .project-desc {
-      color: var(--white);
-      font-size: 1rem;
-      margin-bottom: 12px;
-      opacity: 0.96;
+    .project-actions {
+      margin-top:auto;
+      display:flex;
+      gap:10px;
+      align-items:center;
     }
-    .project-tags {
-      display: flex;
-      gap: 9px;
-      margin-bottom: 12px;
+    .project-actions a { text-decoration:none; font-weight:700; color:var(--accent); }
+
+    /* Empty project placeholder */
+    .empty-state {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:140px;
+      border-radius:12px;
+      border:1px dashed rgba(255,255,255,0.03);
+      color:var(--muted);
+      background: transparent;
+      text-align:center;
+      padding:18px;
     }
-    .project-tag {
-      background: var(--emerald-light);
-      color: var(--emerald-dark);
-      padding: 4px 13px;
-      border-radius: 16px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      border: 1.5px solid var(--emerald-dark);
+
+    /* Hobbies */
+    .hobbies-list {
+      display:flex;
+      gap:12px;
+      margin-top:10px;
+      flex-wrap:wrap;
     }
-    .project-link {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.05rem;
-      transition: color var(--transition);
-      letter-spacing: 0.5px;
+    .hobby {
+      padding:10px 14px;
+      border-radius:12px;
+      background: rgba(255,255,255,0.02);
+      color:var(--muted);
+      font-weight:600;
     }
-    .project-link:hover { color: var(--emerald-light);}
-    .empty-project {
-      font-style: italic;
-      color: var(--emerald-light);
-      text-align: center;
-      width: 100%;
-      padding: 38px 0;
-      background: none;
-      border: 2px dashed var(--emerald-dark);
-      border-radius: var(--radius);
+
+    /* Contact card */
+    .contact-card {
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      padding:18px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.03);
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
     }
-    .contact-section {
-      background: linear-gradient(135deg, var(--black) 80%, var(--emerald-dark) 100%);
-      border-radius: var(--radius);
-      box-shadow: 0 8px 28px rgba(46,204,113,0.10);
-      padding: 38px 32px;
-      margin: 42px 8vw 0 8vw;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      border: 2.5px solid var(--emerald-dark);
+    .contact-card a { text-decoration:none; color:var(--emerald); font-weight:700; }
+
+    /* -------------------------
+       Slider: style & dots
+       ------------------------- */
+    .slider {
+      position:relative;
+      width:100%;
+      height:160px;
+      border-radius:10px;
+      overflow:hidden;
+      background:rgba(0,0,0,0.18);
     }
-    .contact-section h2 {
-      margin-bottom: 12px;
-      color: var(--emerald-light);
-      text-shadow: 0 2px 8px rgba(46,204,113,0.13);
+    .slides {
+      position:relative;
+      width:100%;
+      height:100%;
     }
-    .contact-section p {
-      margin: 0 0 10px 0;
-      color: var(--white);
-      font-size: 1.08rem;
-      opacity: 0.94;
+    .slides img {
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:0;
+      transform: scale(1.02);
+      transition: opacity 600ms ease, transform 700ms ease;
     }
-    .contact-link {
-      color: var(--emerald);
-      font-weight: 700;
-      text-decoration: none;
-      font-size: 1.12rem;
-      border-bottom: 2px solid var(--accent);
-      transition: color var(--transition), border-color var(--transition);
-      margin-top: 6px;
-      letter-spacing: 0.5px;
+    .slides img.is-active {
+      opacity:1;
+      transform: scale(1);
     }
-    .contact-link:hover {
-      color: var(--accent);
-      border-color: var(--emerald-light);
-      text-decoration: underline;
+    .slider-dots {
+      position:absolute;
+      left:12px;
+      bottom:12px;
+      display:flex;
+      gap:8px;
+      z-index:20;
     }
-    @media (max-width: 900px) {
-      .hero { flex-direction: column; gap: 14px; text-align: center;}
-      .avatar { margin-bottom: 22px;}
-      .hero-info h1 { font-size: 2.1rem;}
-      .section { padding: 32px 4vw;}
-      .contact-section { padding: 32px 4vw;}
+    .dot {
+      width:9px;
+      height:9px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.12);
+      border:1px solid rgba(0,0,0,0.12);
+      cursor:pointer;
+      transition: transform var(--transition), background var(--transition);
     }
-    @media (max-width: 600px) {
-      nav { padding: 0 2vw; height: 56px;}
-      .section { padding: 24px 2vw;}
-      .contact-section { padding: 22px 2vw;}
-      .projects-list { grid-template-columns: 1fr;}
-      .project-card img { max-width: 100%; }
+    .dot.is-active {
+      transform: scale(1.35);
+      background: var(--emerald);
+      box-shadow: 0 6px 18px rgba(2,6,23,0.5);
     }
+
+    /* -------------------------
+       Responsive breakpoints
+       ------------------------- */
+    @media (max-width:1100px) {
+      .container { padding: 14px 12px 36px 12px; }
+      .hero { padding: 24px; gap:18px; }
+    }
+
+    @media (max-width:900px) {
+      .nav-links { display:none; } /* hide desktop links */
+      .hamburger { display:flex; }
+      .hero { grid-template-columns: 128px 1fr; gap:18px; padding:20px; }
+      .avatar-wrap{ width:128px }
+      .avatar{ width:110px; height:110px}
+      nav{ top:12px; padding:8px }
+      .projects-grid { gap:14px; }
+    }
+
+    @media (max-width:700px) {
+      .hero{ grid-template-columns: 1fr; text-align:center; padding:18px; gap:16px }
+      .avatar-wrap{ order:-1; justify-content:center }
+      .hero-info { align-items:center; display:flex; flex-direction:column }
+      .hero-ctas { justify-content:center }
+      .project-media img { height:120px; }
+      .mobile-panel { width: 100%; max-width: 420px; }
+    }
+
+    @media (max-width:480px) {
+      .container { width: calc(100% - 28px); padding: 12px 14px 36px 14px; }
+      .hero { padding: 14px; gap:12px; border-radius:12px }
+      .avatar { width: 96px; height:96px }
+      .skill-inline { display:block; margin-top:8px; }
+      .btn-primary { padding:10px 14px; }
+      .project-media img { height:98px; }
+      .slides img { transition-duration: 420ms; }
+    }
+
+    /* Accessibility: reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+
+    /* footer spacing */
+    footer { margin: 32px 0 60px 0; color:var(--muted); text-align:center; font-size:0.92rem; }
+
+    /* Small utility tweaks for tap targets */
+    a, button { -webkit-tap-highlight-color: rgba(0,0,0,0); }
   </style>
 </head>
 <body>
-  <nav>
-    <div style="font-family:'Montserrat';font-size:1.18rem;font-weight:700;color:var(--emerald-light);letter-spacing:2px;">Ozaragaryan Floyd</div>
-    <ul>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#hobbies">Hobbies</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-  <section class="hero">
-    <img src="https://avatars.githubusercontent.com/u/15107901?v=4" alt="Ozaragaryan Floyd" class="avatar">
-    <div class="hero-info">
-      <h1>Hi, I'm Ozaragaryan Floyd</h1>
-      <p>Web Developer specializing in Shopify, WordPress, and SEO.<br>
-        <span style="color:var(--emerald);">HTML · CSS · JavaScript · PHP · Liquid</span></p>
-      <a href="#contact" class="btn">Let's Work Together</a>
-    </div>
-  </section>
-  <section class="section" id="skills">
-    <h2>Skills & Technologies</h2>
-    <ul class="skills-list">
-      <li>Shopify</li>
-      <li>WordPress</li>
-      <li>SEO</li>
-      <li>HTML</li>
-      <li>CSS</li>
-      <li>JavaScript</li>
-      <li>PHP</li>
-      <li>Liquid</li>
-    </ul>
-  </section>
-  <!-- ... (your header, nav, etc. remain unchanged) ... -->
 
-<section class="section" id="projects">
-  <h2>My Projects</h2>
-  <div class="projects-list">
-    <div class="project-card">
-      <div class="slider">
-        <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/border1.png" alt="Border Sleep - Screenshot 1" class="slide active">
-        <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/border2.png" alt="Border Sleep - Screenshot 2" class="slide">
-        <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/border3.png" alt="Border Sleep - Screenshot 3" class="slide">
-        <button class="prev">&#10094;</button>
-        <button class="next">&#10095;</button>
+  <!-- TOPBAR (sticky) -->
+  <div class="topbar" aria-hidden="false">
+    <nav role="navigation" aria-label="Main navigation">
+      <a href="#" class="brand" aria-label="Ozaragaryan Floyd - home">
+        <span class="logo" aria-hidden="true">OF</span>
+        <span style="display:inline-block">
+          <div style="font-size:0.98rem">Ozaragaryan Floyd</div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:-3px">Web Developer</div>
+        </span>
+      </a>
+
+      <!-- Desktop links -->
+      <div style="display:flex; align-items:center; gap:12px;">
+        <ul class="nav-links" role="menubar" aria-label="Primary">
+          <li role="none"><a role="menuitem" href="#skills">Skills</a></li>
+          <li role="none"><a role="menuitem" href="#projects">Projects</a></li>
+          <li role="none"><a role="menuitem" href="#hobbies">Hobbies</a></li>
+          <li role="none"><a role="menuitem" href="#contact" class="cta-ghost">Contact</a></li>
+        </ul>
+
+        <!-- Hamburger (mobile) -->
+        <button class="hamburger" id="hamburger" aria-controls="mobile-panel" aria-expanded="false" aria-label="Open menu">
+          <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="18" height="2" rx="1" fill="currentColor" />
+            <rect y="5" width="18" height="2" rx="1" fill="currentColor" />
+            <rect y="10" width="18" height="2" rx="1" fill="currentColor" />
+          </svg>
+        </button>
       </div>
-      <div class="project-title">Border Sleep Therapy Solutions</div>
-      <div class="project-tags">
-        <span class="project-tag">Shopify</span>
-        <span class="project-tag">SEO</span>
-        <span class="project-tag">Liquid</span>
-      </div>
-      <div class="project-desc">
-        A professional sleep therapy e-commerce website built on Shopify. Features custom theme development, advanced product filtering, SEO optimization, and responsive design for users seeking CPAP machines and sleep solutions.
-      </div>
-      <a href="https://www.bordersleep.com/" target="_blank" class="project-link">Visit Site</a>
-    </div>
-    <div class="empty-project">
-      I will personally add more projects here soon!<br>
-      <span style="font-size:0.98em;color:var(--emerald);">
-        (Showcase your best work to impress clients!)
-      </span>
-    </div>
+    </nav>
   </div>
-</section>
 
-<!-- ... (your hobbies and contact section remain unchanged) ... -->
+  <!-- Mobile slide-in panel -->
+  <aside id="mobile-panel" class="mobile-panel" aria-hidden="true" tabindex="-1">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <div style="display:flex; gap:12px; align-items:center;">
+        <div class="logo" style="width:44px; height:44px; display:grid; place-items:center; border-radius:10px; background: linear-gradient(180deg,var(--emerald) 0%, var(--emerald-deep) 100%); color:#07110d; font-weight:700;">OF</div>
+        <div>
+          <div style="color:var(--emerald); font-weight:700;">Ozaragaryan Floyd</div>
+          <div style="font-size:0.86rem; color:var(--muted); margin-top:2px;">Web Developer</div>
+        </div>
+      </div>
+      <button class="close-btn" id="mobile-close" aria-label="Close menu">✕</button>
+    </div>
 
-<!-- Add this to the end of your <body> just before </body> -->
-<script>
-  // Simple slider script for the project card
-  document.addEventListener('DOMContentLoaded', function() {
-    const slider = document.querySelector('.slider');
-    const slides = slider.querySelectorAll('.slide');
-    const prevBtn = slider.querySelector('.prev');
-    const nextBtn = slider.querySelector('.next');
-    let current = 0;
-    let timer;
+    <nav aria-label="Mobile primary">
+      <div class="mobile-links">
+        <a href="#skills" data-panel-link>Skills</a>
+        <a href="#projects" data-panel-link>Projects</a>
+        <a href="#hobbies" data-panel-link>Hobbies</a>
+        <a href="#contact" class="cta-ghost" data-panel-link>Contact</a>
+      </div>
+    </nav>
 
-    function showSlide(idx) {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === idx);
-        slide.style.display = i === idx ? 'block' : 'none';
+    <div style="margin-top:auto; color:var(--muted); font-size:0.95rem;">
+      <div style="margin-bottom:6px;">Built with care • Fast • Accessible</div>
+      <div style="font-size:0.9rem;"><a href="mailto:your.email@example.com" style="color:var(--emerald); text-decoration:none; font-weight:700;">your.email@example.com</a></div>
+    </div>
+  </aside>
+
+  <!-- CONTAINER -->
+  <main class="container" id="top">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="avatar-wrap" aria-hidden="false">
+        <img class="avatar" src="https://avatars.githubusercontent.com/u/15107901?v=4" alt="Portrait — Ozaragaryan Floyd">
+      </div>
+
+      <div class="hero-info">
+        <h1 id="hero-heading">Hi — I'm <span style="color:var(--emerald)">Ozaragaryan Floyd</span></h1>
+        <p class="lead">Web Developer specializing in <strong>Shopify</strong>, <strong>WordPress</strong> and <strong>SEO</strong>. I build fast, accessible stores and sites that convert. <span class="skill-inline">HTML · CSS · JS · PHP · Liquid</span></p>
+
+        <div class="hero-ctas" role="group" aria-label="Primary actions">
+          <a class="btn-primary" href="#projects">View Projects</a>
+          <a class="btn-outline" href="mailto:your.email@example.com">Email Me</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="content-section" id="skills" aria-labelledby="skills-title">
+      <div class="section-head">
+        <h2 id="skills-title">Skills & Technologies</h2>
+        <div class="section-sub">Tools & technologies I use to ship projects</div>
+      </div>
+
+      <ul class="skills-list" aria-hidden="false">
+        <li title="Shopify">🛒 Shopify</li>
+        <li title="WordPress">🌐 WordPress</li>
+        <li title="SEO">🔎 SEO</li>
+        <li title="HTML">🧩 HTML</li>
+        <li title="CSS">🎨 CSS</li>
+        <li title="JavaScript">⚡ JavaScript</li>
+        <li title="PHP">🐘 PHP</li>
+        <li title="Liquid">🧵 Liquid</li>
+      </ul>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="content-section" id="projects" aria-labelledby="projects-title">
+      <div class="section-head">
+        <h2 id="projects-title">Selected Projects</h2>
+        <div class="section-sub">Client & personal work — focused on e-commerce and conversion</div>
+      </div>
+
+      <div class="projects-grid" role="list">
+
+        <!-- Project 1 -->
+        <article class="project-card" role="listitem" aria-label="Border Sleep Therapy Solutions">
+          <div class="project-media">
+            <!-- Slider -->
+            <div class="slider" data-slider tabindex="0" aria-roledescription="carousel">
+              <div class="slides" aria-hidden="false">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/border1.png" alt="Border Sleep screenshot 1" class="is-active">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/border2.png" alt="Border Sleep screenshot 2">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/border3.png" alt="Border Sleep screenshot 3">
+              </div>
+
+              <!-- dots created by JS -->
+              <div class="slider-dots" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <h3 class="project-title">Border Sleep Therapy Solutions</h3>
+          <p class="project-desc">A professional sleep therapy e-commerce website built on Shopify. Custom theme development, advanced product filtering, SEO optimization and responsive UX for CPAP & sleep solutions buyers.</p>
+
+          <div class="project-tags" aria-hidden="false">
+            <span class="tag">Shopify</span>
+            <span class="tag">SEO</span>
+            <span class="tag">Liquid</span>
+          </div>
+
+          <div class="project-actions">
+            <a href="https://www.bordersleep.com/" target="_blank" rel="noopener noreferrer" aria-label="Open Border Sleep website">Visit Site ↗</a>
+          </div>
+        </article>
+
+        <!-- Empty placeholder (you mentioned you'll add more) -->
+        <div class="empty-state" role="listitem">
+          I will personally add more projects here soon! <br>
+          <small style="display:block; margin-top:8px; color:var(--muted)">(Showcase your best work to impress clients)</small>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- HOBBIES -->
+    <section class="content-section" id="hobbies" aria-labelledby="hobbies-title">
+      <div class="section-head">
+        <h2 id="hobbies-title">Hobbies</h2>
+        <div class="section-sub">What I do away from the keyboard</div>
+      </div>
+
+      <div class="hobbies-list" role="list">
+        <div class="hobby" role="listitem">🎧 Listening to worship songs</div>
+        <div class="hobby" role="listitem">🏀 Basketball</div>
+        <div class="hobby" role="listitem">🏐 Volleyball</div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="content-section" id="contact" aria-labelledby="contact-title">
+      <div class="section-head">
+        <h2 id="contact-title">Contact</h2>
+        <div class="section-sub">Let's build something great</div>
+      </div>
+
+      <div class="contact-card" role="region" aria-label="Contact information">
+        <div style="font-size:1.02rem; color:var(--muted)">Ready to collaborate or have a project in mind?</div>
+        <a href="mailto:your.email@example.com" aria-label="Email Ozaragaryan Floyd">your.email@example.com</a>
+        <div style="font-size:0.92rem; color:var(--muted)">Prefer a call? Reply with your time zone & we’ll coordinate.</div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Ozaragaryan Floyd — Built with care · <span style="color:var(--muted)">Fast • Accessible • SEO-minded</span>
+    </footer>
+  </main>
+
+  <!-- Scripts -->
+  <script>
+    /* -------------------------
+       Small helpers
+       ------------------------- */
+    (function() {
+      // Footer year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Smooth links (also close mobile panel when clicked)
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', (e)=>{
+          const href = a.getAttribute('href');
+          if(href.length > 1){
+            e.preventDefault();
+            const el = document.querySelector(href);
+            if(el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
+            // close mobile panel if open
+            closeMobilePanel();
+          }
+        });
       });
-      current = idx;
-    }
+    })();
 
-    function nextSlide() {
-      showSlide((current + 1) % slides.length);
-    }
+    /* -------------------------
+       Mobile panel (slide-in)
+       ------------------------- */
+    (function() {
+      const hamburger = document.getElementById('hamburger');
+      const panel = document.getElementById('mobile-panel');
+      const closeBtn = document.getElementById('mobile-close');
+      const panelLinks = document.querySelectorAll('[data-panel-link]');
 
-    function prevSlide() {
-      showSlide((current - 1 + slides.length) % slides.length);
-    }
+      function openMobilePanel() {
+        panel.classList.add('open');
+        panel.setAttribute('aria-hidden', 'false');
+        hamburger.setAttribute('aria-expanded', 'true');
+        // trap focus
+        panel.focus();
+        document.body.style.overflow = 'hidden';
+      }
+      window.openMobilePanel = openMobilePanel;
 
-    function startAutoSlide() {
-      timer = setInterval(nextSlide, 3000);
-    }
+      function closeMobilePanel() {
+        panel.classList.remove('open');
+        panel.setAttribute('aria-hidden', 'true');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+      window.closeMobilePanel = closeMobilePanel;
 
-    function stopAutoSlide() {
-      clearInterval(timer);
-    }
+      hamburger.addEventListener('click', () => {
+        const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+        if (expanded) closeMobilePanel(); else openMobilePanel();
+      });
+      closeBtn.addEventListener('click', closeMobilePanel);
 
-    nextBtn.addEventListener('click', () => {
-      stopAutoSlide();
-      nextSlide();
-      startAutoSlide();
-    });
+      // close on escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMobilePanel();
+      });
 
-    prevBtn.addEventListener('click', () => {
-      stopAutoSlide();
-      prevSlide();
-      startAutoSlide();
-    });
+      // close when clicking links inside
+      panelLinks.forEach(l => l.addEventListener('click', closeMobilePanel));
 
-    showSlide(current);
-    startAutoSlide();
+      // close when clicking outside the panel (on small screens)
+      document.addEventListener('click', (e) => {
+        if (!panel.contains(e.target) && !hamburger.contains(e.target) && panel.classList.contains('open')) {
+          closeMobilePanel();
+        }
+      });
+    })();
 
-    slider.addEventListener('mouseenter', stopAutoSlide);
-    slider.addEventListener('mouseleave', startAutoSlide);
-  });
-</script>
-<style>
-  .slider {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-    height: 240px;
-    margin-bottom: 18px;
-    overflow: hidden;
-    background: #222;
-    border-radius: 12px;
-    box-shadow: 0 2px 16px rgba(46,204,113,0.11);
-    border: 2px solid var(--emerald-light);
-  }
-  .slider img.slide {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-    display: none;
-    transition: opacity 0.6s;
-    border-radius: 12px;
-  }
-  .slider img.active {
-    display: block;
-    opacity: 1;
-  }
-  .slider button.prev,
-  .slider button.next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(46,204,113,0.7);
-    color: #fff;
-    border: none;
-    font-size: 2rem;
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    cursor: pointer;
-    z-index: 2;
-    transition: background 0.3s;
-    outline: none;
-  }
-  .slider button.prev:hover,
-  .slider button.next:hover {
-    background: var(--accent);
-  }
-  .slider button.prev {
-    left: 12px;
-  }
-  .slider button.next {
-    right: 12px;
-  }
-</style>
-  <section class="section" id="hobbies">
-    <h2>Hobbies</h2>
-    <ul class="hobbies-list">
-      <li>Listening to worship songs</li>
-      <li>Basketball</li>
-      <li>Volleyball</li>
-    </ul>
-  </section>
-  <section class="contact-section" id="contact">
-    <h2>Contact</h2>
-    <p>Ready to collaborate or have a project in mind?</p>
-    <a href="mailto:your.email@example.com" class="contact-link">your.email@example.com</a>
-    <!-- Replace with your actual email or contact link -->
-  </section>
+    /* -------------------------
+       Lightweight slider
+       - fade transitions
+       - dots + keyboard nav + pause on hover
+       ------------------------- */
+    (function() {
+      const sliders = document.querySelectorAll('[data-slider]');
+
+      sliders.forEach(slider => {
+        const slidesWrap = slider.querySelector('.slides');
+        const slides = Array.from(slidesWrap.querySelectorAll('img'));
+        const dotsWrap = slider.querySelector('.slider-dots');
+        if(!slides.length) return;
+
+        let idx = 0;
+        let timer = null;
+        const interval = 3000;
+
+        // build dots
+        slides.forEach((_, i)=>{
+          const dot = document.createElement('button');
+          dot.className = 'dot' + (i===0 ? ' is-active' : '');
+          dot.setAttribute('aria-label','Go to slide ' + (i+1));
+          dot.addEventListener('click', ()=> show(i));
+          dotsWrap.appendChild(dot);
+        });
+        const dots = Array.from(dotsWrap.children);
+
+        function show(n){
+          slides.forEach((s,i)=>{
+            s.classList.toggle('is-active', i===n);
+            s.setAttribute('aria-hidden', i===n ? 'false' : 'true');
+            dots[i].classList.toggle('is-active', i===n);
+          });
+          idx = n;
+        }
+
+        function next(){
+          show((idx+1) % slides.length);
+        }
+
+        function start(){
+          stop();
+          timer = setInterval(next, interval);
+        }
+        function stop(){
+          if(timer) { clearInterval(timer); timer = null; }
+        }
+
+        // pause on hover/focus
+        slider.addEventListener('mouseenter', stop);
+        slider.addEventListener('mouseleave', start);
+        slider.addEventListener('focusin', stop);
+        slider.addEventListener('focusout', start);
+
+        // keyboard navigation
+        slider.addEventListener('keydown', (e)=>{
+          if(e.key === 'ArrowLeft'){ show((idx-1+slides.length)%slides.length); }
+          if(e.key === 'ArrowRight'){ show((idx+1)%slides.length); }
+        });
+
+        // init
+        show(0);
+        start();
+
+        // Respect reduced motion preference
+        const rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if(rm.matches) stop();
+      });
+    })();
+  </script>
+
 </body>
-
 </html>
-
