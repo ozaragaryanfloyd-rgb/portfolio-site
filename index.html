@@ -174,19 +174,43 @@ nav {
       align-items:center;
     }
     .nav-links a {
-      text-decoration:none;
-      color:var(--muted);
-      font-weight:600;
-      font-size:0.98rem;
-      padding:8px 10px;
-      border-radius:8px;
-      transition: color var(--transition), background var(--transition), transform var(--transition);
-    }
-    .nav-links a:hover, .nav-links a:focus {
-      color: #eafcf3;
-      transform: translateY(-2px);
-      outline: none;
-    }
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.98rem;
+  padding: 8px 14px;
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Hover + focus effects */
+.nav-links a:hover,
+.nav-links a:focus {
+  color: #ffffff;
+  background: linear-gradient(135deg, #084d34, #263b32);
+  box-shadow: 0 4px 10px rgba(46, 181, 122, 0.3);
+  transform: translateY(-3px) scale(1.03);
+  outline: none;
+}
+
+/* Optional underline animation */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #34c38f;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-links a:hover::after {
+  width: 60%;
+}
+
 
     .cta-ghost {
       padding:8px 14px;
@@ -1423,5 +1447,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
-
 
