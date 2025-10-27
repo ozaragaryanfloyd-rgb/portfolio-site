@@ -220,9 +220,9 @@ nav {
       position: fixed;
       top: 0;
       right: -100%;
-      width: min(92%, 360px);
+      width: min(92%, 200px);
       height: 100vh;
-      background: linear-gradient(180deg, rgba(11,12,14,0.98), rgba(15,23,32,0.98));
+      background: linear-gradient(180deg, rgb(16 44 49), rgba(15, 23, 32, 0.98));
       box-shadow: -24px 0 60px rgba(2,6,23,0.5);
       transition: right 360ms cubic-bezier(.2,.9,.2,1);
       z-index: 200;
@@ -233,8 +233,9 @@ nav {
     }
     .mobile-panel.open { right: 0; }
     .mobile-panel .close-btn {
-      width:44px; height:44px; border-radius:10px; border:1px solid rgba(255,255,255,0.03);
+      width:44px; height:44px; border-radius:10px; border:2px solid rgba(255,255,255,0.03);
       display:inline-grid; place-items:center; background:transparent; cursor:pointer; color:var(--muted);
+      font-size: 20px;  
     }
     .mobile-links { display:flex; flex-direction:column; gap:12px; margin-top:6px; }
     .mobile-links a { 
@@ -622,7 +623,7 @@ nav {
   }
 
   .mobile-panel {
-    width: min(90%, 380px);
+    width: min(90%, 200px);
   }
 }
 
@@ -664,8 +665,9 @@ nav {
   }
 
   .mobile-panel {
-    width: 100%;
+    width: 45%;
     max-width: 420px;
+
   }
 
   .skills-list li {
@@ -732,7 +734,7 @@ nav {
 }
 
   .project-media img {
-    height: 100px;
+    height: 160px;
   }
 
   .project-card {
@@ -836,11 +838,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   <aside id="mobile-panel" class="mobile-panel" aria-hidden="true" tabindex="-1">
     <div style="display:flex; justify-content:space-between; align-items:center;">
       <div style="display:flex; gap:12px; align-items:center;">
-        <div class="logo" style="width:44px; height:44px; display:grid; place-items:center; border-radius:10px; background: linear-gradient(180deg,var(--emerald) 0%, var(--emerald-deep) 100%); color:#07110d; font-weight:700;">RF</div>
-        <div>
-          <div style="color:var(--emerald); font-weight:700;">Ryan Floyd Ozaraga</div>
-          <div style="font-size:0.86rem; color:var(--muted); margin-top:2px;">Web Developer</div>
-        </div>
+        
+        
       </div>
       <button class="close-btn" id="mobile-close" aria-label="Close menu">✕</button>
     </div>
@@ -855,10 +854,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       </div>
     </nav>
 
-    <div style="margin-top:auto; color:var(--muted); font-size:0.95rem;">
-      <div style="margin-bottom:6px;">Built with care • Fast • Accessible</div>
-      <div style="font-size:0.9rem;"><a href="mailto:your.email@example.com" style="color:var(--emerald); text-decoration:none; font-weight:700;">your.email@example.com</a></div>
-    </div>
+    
   </aside>
 
   <!-- CONTAINER -->
@@ -999,6 +995,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
           <div class="project-tags" aria-hidden="false">
             <span class="tag">WordPress</span>
+            <span class="tag">SEO</span>
             <span class="tag">HTML</span>
             <span class="tag">CSS</span>
             <span class="tag">JavaScript</span>
@@ -1073,6 +1070,41 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
           </div>
         </article>
 
+        <!-- Project 6 -->
+        <article class="project-card" role="listitem" aria-label="Zen">
+          <div class="project-media">
+            <!-- Slider -->
+            <div class="slider" data-slider tabindex="0" aria-roledescription="carousel">
+              <div class="slides" aria-hidden="false">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/Aborderdme.png" alt="Zen1" class="is-active">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/Aborderdme2.png" alt="Zen2">
+               
+              </div>
+
+              <!-- dots created by JS -->
+              <div class="slider-dots" aria-hidden="true"></div>
+            </div>
+          </div>
+
+         <h3 class="project-title">Border DME</h3>
+<p class="project-desc">
+  Border DME is a blog website connected to the main store, featuring articles, guides, and healthcare tips related to medical equipment. It’s designed to enhance user engagement and support seamless navigation between the blog and the shop.
+</p>
+  
+
+          <div class="project-tags" aria-hidden="false">
+            <span class="tag">WordPress</span>
+            <span class="tag">SEO</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+
+          <div class="project-actions">
+            <a href="https://borderdme.com/" target="_blank" rel="noopener noreferrer" aria-label="Open Border Sleep website">Visit Site ↗</a>
+          </div>
+        </article>
+
         <!-- Empty placeholder (you mentioned you'll add more) -->
       <!--   <div class="empty-state" role="listitem">
           I will personally add more projects here soon! <br>
@@ -1110,7 +1142,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       <div style="display:grid; gap:16px;">
         <div>
           <h3 style="margin:0; color:#eafcf3; font-size:1rem; font-weight:700;">Freelance Website Designer / Developer</h3>
-          <div style="color:var(--muted); font-size:0.95rem; margin-bottom:8px;">Remote — 2023–Present</div>
+          <div style="color:var(--muted); font-size:0.95rem; margin-bottom:8px;">Remote — 2024–Present</div>
           <ul style="color:var(--muted); margin:0 0 12px 18px;">
             <li>Developed and customized Shopify and WordPress websites focusing on functionality and performance.</li>
             <li>Used JavaScript and Liquid for data fetching, enabling dynamic product displays and real-time content updates.</li>
@@ -1217,7 +1249,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 
     <footer>
-      © <span id="year"></span> Ryab FLoyd P. Ozaraga — Built with care · <span style="color:var(--muted)">Fast • Accessible • SEO-minded</span>
+      © <span id="year"></span> Ryan FLoyd P. Ozaraga — Built with care · <span style="color:var(--muted)">Fast • Accessible • SEO-minded</span>
     </footer>
   </main>
 
@@ -1390,6 +1422,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
-
-
 
