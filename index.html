@@ -8,7 +8,1458 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
 
+  <!-- Meta --><!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ryan Floyd — Web Developer Portfolio</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
   <!-- Meta -->
+  <meta name="description" content="Ryan FLOYD Ozaraga — Shopify, WordPress & SEO focused Web Developer. Portfolio showcasing projects and skills." />
+
+  <style>
+    /* -------------------------
+       Theme variables
+       ------------------------- */
+    :root{
+      --bg-1: #0b0c0e;           /* deep background */
+      --bg-2: #0f1720;           /* secondary */
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.03);
+      --emerald: #2ecc71;
+      --emerald-deep: #059669;
+      --accent: #00c6ae;
+      --muted: #9aa3a8;
+      --card: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-1: 0 8px 30px rgba(2,6,23,0.6);
+      --glass-border: rgba(46,204,113,0.12);
+      --transition: 280ms cubic-bezier(.2,.9,.2,1);
+      --max-width: 1200px;
+      --nav-height: 64px;
+    }
+
+
+    /* -------------------------
+       Base reset & layout
+       ------------------------- */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body {
+  margin: 0;
+  padding-top: 80px;
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #eaf5ef;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.45;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+  position: relative;
+  background: linear-gradient(120deg, #0a0b0d, #0f1720, #0a0b0d);
+  background-size: 300% 300%;
+  animation: gradientMove 15s ease-in-out infinite;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(46, 204, 113, 0.15), transparent 60%),
+    radial-gradient(circle at 80% 70%, rgba(0, 198, 174, 0.15), transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(0, 150, 255, 0.12), transparent 70%);
+  filter: blur(80px);
+  animation: glowFlow 20s ease-in-out infinite alternate;
+  z-index: -1;
+  opacity: 0.8;
+}
+
+/* Main background movement */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Glowing blobs movement */
+@keyframes glowFlow {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(5%, -5%) scale(1.05);
+  }
+  100% {
+    transform: translate(-5%, 5%) scale(1);
+  }
+}
+
+
+
+
+
+    /* Layout container */
+    .container {
+      width: calc(100% - 48px);
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 18px 0 48px 0;
+    }
+
+    /* -------------------------
+       Nav (desktop) + mobile panel
+       ------------------------- */
+   /* --- Sticky Header --- */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 120;
+  display: flex;
+  justify-content: center;
+  padding: 8px 16px;
+  background: rgba(11, 12, 14, 0.85); /* translucent background */
+  backdrop-filter: blur(10px) saturate(120%);
+  box-shadow: 0 6px 20px rgba(2, 6, 23, 0.6);
+}
+
+nav {
+  width: calc(100% - 24px);
+  max-width: var(--max-width);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+    .brand {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      text-decoration:none;
+      color:var(--emerald);
+      font-weight:700;
+      letter-spacing:1px;
+    }
+    .brand .logo {
+      width:44px;
+      height:44px;
+      border-radius:10px;
+      display:inline-grid;
+      place-items:center;
+      font-weight:700;
+      color: #07110d;
+      background: linear-gradient(180deg,var(--emerald) 0%, var(--emerald-deep) 100%);
+      box-shadow: 0 6px 18px rgba(2,6,23,0.5);
+      font-family: 'Montserrat', Inter, sans-serif;
+    }
+
+    /* Desktop links */
+    .nav-links {
+      display:flex;
+      gap:18px;
+      list-style:none;
+      margin:0; padding:0;
+      align-items:center;
+    }
+    .nav-links a {
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.98rem;
+  padding: 8px 14px;
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Hover + focus effects */
+.nav-links a:hover,
+.nav-links a:focus {
+  color: #ffffff;
+  background: linear-gradient(135deg, #084d34, #263b32);
+  box-shadow: 0 4px 10px rgba(46, 181, 122, 0.3);
+  transform: translateY(-3px) scale(1.03);
+  outline: none;
+}
+
+/* Optional underline animation */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #34c38f;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-links a:hover::after {
+  width: 60%;
+}
+
+
+    .cta-ghost {
+      padding:8px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      color:var(--emerald);
+      background: transparent;
+      font-weight:700;
+      text-decoration:none;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .cta-ghost:hover { background: rgba(46,204,113,0.06); box-shadow: 0 6px 20px rgba(2,6,23,0.55); transform: translateY(-3px); }
+
+    /* Mobile hamburger */
+    .hamburger {
+      display:none;
+      width:44px;
+      height:44px;
+      border-radius:10px;
+      background: transparent;
+      border:1px solid rgba(255,255,255,0.03);
+      color:var(--muted);
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+    }
+    .hamburger:focus { outline:2px solid rgba(46,204,113,0.12); }
+
+    /* Mobile panel */
+    .mobile-panel {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: min(92%, 200px);
+      height: 100vh;
+      background: linear-gradient(180deg, rgb(16 44 49), rgba(15, 23, 32, 0.98));
+      box-shadow: -24px 0 60px rgba(2,6,23,0.5);
+      transition: right 360ms cubic-bezier(.2,.9,.2,1);
+      z-index: 200;
+      padding: 28px 18px;
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+    .mobile-panel.open { right: 0; }
+    .mobile-panel .close-btn {
+      width:44px; height:44px; border-radius:10px; border:2px solid rgba(255,255,255,0.03);
+      display:inline-grid; place-items:center; background:transparent; cursor:pointer; color:var(--muted);
+      font-size: 20px;  
+    }
+    .mobile-links { display:flex; flex-direction:column; gap:12px; margin-top:6px; }
+    .mobile-links a { 
+  display: block;
+  width: 100%;
+  color: #eafcf3;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  text-align: center;
+  margin-bottom: 10px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.mobile-links a:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(1.03);
+}
+
+
+    /* -------------------------
+       Hero
+       ------------------------- */
+    .hero {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 28px;
+      align-items: center;
+      padding: 36px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 18px 60px rgba(2,6,23,0.6);
+      backdrop-filter: blur(8px) saturate(120%);
+    }
+
+    /* Avatar */
+    .avatar-wrap {
+      width: 220px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+    .avatar {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.06);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 18px 40px rgba(2,6,23,0.6), 0 6px 18px rgba(46,204,113,0.06);
+      object-fit: cover;
+      display:block;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .avatar:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 28px 80px rgba(2,6,23,0.7); }
+
+    /* Hero info */
+    .hero-info h1 {
+      margin: 0 0 8px 0;
+      font-family: 'Montserrat', 'Inter', sans-serif;
+      font-size: clamp(1.6rem, 3.4vw, 2.28rem);
+      color: #e9fff4;
+      letter-spacing: 0.6px;
+    }
+    .hero-info p.lead {
+      margin: 0 0 18px 0;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 1.02rem;
+    }
+    .skill-inline {
+      display:inline-block;
+      padding:6px 10px;
+      margin-left:4px;
+      border-radius:999px;
+      background: rgba(46,204,113,0.06);
+      color: var(--emerald);
+      font-weight:700;
+      font-size:0.95rem;
+      border:1px solid rgba(46,204,113,0.06);
+    }
+
+    .hero-ctas { display:flex; gap:12px; align-items:center; margin-top:8px; flex-wrap:wrap; }
+    .btn-primary {
+      background: linear-gradient(180deg,var(--emerald) 0%, var(--emerald-deep) 100%);
+      color: #06221a;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight:700;
+      border: none;
+      text-decoration:none;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .btn-primary:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 18px 40px rgba(2,6,23,0.7); }
+    .btn-outline {
+      padding: 10px 16px;
+      border-radius: 10px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-weight:600;
+      text-decoration:none;
+    }
+
+    /* -------------------------
+       Sections
+       ------------------------- */
+    section.content-section {
+      margin-top: 26px;
+      padding: 20px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border: 1px solid rgba(255,255,255,0.02);
+    }
+    .section-head {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .section-head h2 {
+      margin:0;
+      font-family:'Montserrat';
+      font-size:1.28rem;
+      color: #eafcf3;
+      letter-spacing:0.6px;
+    }
+    .section-sub {
+      color:var(--muted);
+      font-size:0.96rem;
+    }
+
+    /* Skills list (pills) */
+    .skills-list {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:8px 0 0 0;
+      padding:0;
+      list-style:none;
+    }
+    .skills-list li {
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      background: linear-gradient(90deg, rgba(46,204,113,0.06), rgba(46,204,113,0.03));
+      color: var(--emerald);
+      font-weight:700;
+      font-size:0.95rem;
+      border:1px solid rgba(46,204,113,0.04);
+      min-width: fit-content;
+      transition: transform var(--transition);
+    }
+    .skills-list li:hover { transform: translateY(-4px); }
+
+    /* Projects grid/cards */
+    .projects-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap:18px;
+      margin-top:10px;
+    }
+    .project-card {
+      border-radius: 14px;
+      padding: 14px;
+      min-height:160px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 10px 30px rgba(2,6,23,0.55);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      overflow:hidden;
+      position:relative;
+    }
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 28px 80px rgba(2,6,23,0.7);
+      border-color: rgba(46,204,113,0.09);
+    }
+    .project-media {
+      width:100%;
+      border-radius:10px;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(0,0,0,0.25);
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .project-media img { width:100%; display:block; object-fit:cover; height:140px; }
+
+    .project-title { font-weight:700; color:#eafcf3; margin:0; font-size:1.05rem; }
+    .project-desc { margin:0; color:var(--muted); font-size:0.95rem; line-height:1.35; }
+    .project-tags { display:flex; gap:8px; flex-wrap:wrap; margin-top:6px; }
+    .tag {
+      padding:6px 10px;
+      border-radius:10px;
+      background: rgba(255,255,255,0.02);
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,0.02);
+      font-weight:600;
+      font-size:0.88rem;
+    }
+    .project-actions {
+      margin-top:auto;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .project-actions a { text-decoration:none; font-weight:700; color:var(--accent); }
+
+    /* Empty project placeholder */
+    .empty-state {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:140px;
+      border-radius:12px;
+      border:1px dashed rgba(255,255,255,0.03);
+      color:var(--muted);
+      background: transparent;
+      text-align:center;
+      padding:18px;
+    }
+
+    /* Hobbies */
+    .hobbies-list {
+      display:flex;
+      gap:12px;
+      margin-top:10px;
+      flex-wrap:wrap;
+    }
+    .hobby {
+      padding:10px 14px;
+      border-radius:12px;
+      background: rgba(255,255,255,0.02);
+      color:var(--muted);
+      font-weight:600;
+    }
+
+    /* Contact card */
+    .contact-card {
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      padding:18px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.03);
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+    }
+    .contact-card a { text-decoration:none; color:var(--emerald); font-weight:700; }
+
+    /* -------------------------
+       Slider: style & dots
+       ------------------------- */
+    .slider {
+      position:relative;
+      width:100%;
+      height:160px;
+      border-radius:10px;
+      overflow:hidden;
+      background:rgba(0,0,0,0.18);
+    }
+    .slides {
+      position:relative;
+      width:100%;
+      height:100%;
+    }
+    .slides img {
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:0;
+      transform: scale(1.02);
+      transition: opacity 600ms ease, transform 700ms ease;
+    }
+    .slides img.is-active {
+      opacity:1;
+      transform: scale(1);
+    }
+    .slider-dots {
+      position:absolute;
+      left:12px;
+      bottom:12px;
+      display:flex;
+      gap:8px;
+      z-index:20;
+    }
+    .dot {
+      width:9px;
+      height:9px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.12);
+      border:1px solid rgba(0,0,0,0.12);
+      cursor:pointer;
+      transition: transform var(--transition), background var(--transition);
+    }
+    .dot.is-active {
+      transform: scale(1.35);
+      background: var(--emerald);
+      box-shadow: 0 6px 18px rgba(2,6,23,0.5);
+    }
+
+    /* -------------------------
+       Responsive breakpoints
+       ------------------------- */
+  /* -------------------------
+   Responsive breakpoints (Improved)
+   ------------------------- */
+
+/* Large tablets & small laptops */
+@media (max-width:1100px) {
+  .container {
+    padding: 16px 18px 48px 18px;
+  }
+
+  .hero {
+    padding: 28px;
+    gap: 22px;
+    grid-template-columns: 180px 1fr;
+  }
+
+  .avatar {
+    width: 150px;
+    height: 150px;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+}
+
+/* Tablets (portrait & mid-range devices) */
+@media (max-width:900px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .hero {
+    grid-template-columns: 140px 1fr;
+    gap: 20px;
+    padding: 24px;
+  }
+
+  .avatar-wrap {
+    width: 140px;
+  }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+  }
+
+  .hero-info h1 {
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+  }
+
+  .hero-info p.lead {
+    font-size: 0.96rem;
+  }
+
+  .hero-ctas {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .projects-grid {
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  section.content-section {
+    padding: 18px;
+  }
+
+  .mobile-panel {
+    width: min(90%, 200px);
+  }
+}
+
+/* Small tablets and large phones */
+@media (max-width:700px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .avatar-wrap {
+    order: -1;
+    justify-content: center;
+  }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+  }
+
+  .hero-info {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-ctas {
+    justify-content: center;
+  }
+
+  .project-media img {
+    height: 120px;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile-panel {
+    width: 45%;
+    max-width: 420px;
+
+  }
+
+  .skills-list li {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+
+  .hobbies-list {
+    justify-content: center;
+  }
+}
+
+/* Mobile (phones) */
+@media (max-width:480px) {
+  .container {
+    width: calc(100% - 28px);
+    padding: 12px 14px 40px 14px;
+  }
+
+  .hero {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+.avatar-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* centers the image horizontally */
+  }
+
+
+   .avatar {
+    
+    margin-left: auto;
+    margin-right: auto;
+    align-self: center ;
+  }
+
+  .hero-info h1 {
+    font-size: 1.4rem;
+    line-height: 1.3;
+  }
+
+  .skill-inline {
+    display: block;
+    margin-top: 10px;
+  }
+
+  .btn-primary {
+    padding: 10px 16px;
+  }
+
+  .btn-outline {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  section.content-section {
+    padding: 14px;
+  }
+  .section-sub {
+    color: var(--muted);
+    font-size: 0.7rem;
+}
+
+  .project-media img {
+    height: 160px;
+  }
+
+  .project-card {
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .slides img {
+    transition-duration: 420ms;
+  }
+
+  .contact-card {
+    padding: 14px;
+  }
+
+  footer {
+    font-size: 0.85rem;
+    margin-top: 32px;
+  }
+}
+
+/* Accessibility: reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+
+    /* footer spacing */
+    footer { margin: 32px 0 60px 0; color:var(--muted); text-align:center; font-size:0.92rem; }
+
+    /* Small utility tweaks for tap targets */
+    a, button { -webkit-tap-highlight-color: rgba(0,0,0,0); }
+/* Prevent content from being hidden behind sticky navbar when scrolling to anchors */
+section[id] {
+  scroll-margin-top: calc(var(--nav-height) + 20px);
+}
+svg { color: var(--accent, #2563eb); }
+
+    
+  </style>
+</head>
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const targetId = this.getAttribute('href');
+    const target = document.querySelector(targetId);
+    if (!target) return;
+    e.preventDefault();
+
+    const navHeight = document.querySelector('nav').offsetHeight;
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+
+    window.scrollTo({
+      top: targetPosition - navHeight - 15, // adjust 15px gap
+      behavior: 'smooth'
+    });
+  });
+});
+</script>
+
+
+<body>
+
+  <!-- TOPBAR (sticky) -->
+  <div class="topbar" aria-hidden="false">
+    <nav role="navigation" aria-label="Main navigation">
+      <a href="#" class="brand" aria-label="Ozaragaryan Floyd - home">
+        <span class="logo" aria-hidden="true">RF</span>
+        <span style="display:inline-block">
+          <div style="font-size:0.98rem">Ryan Floyd</div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:-3px">Web Developer</div>
+        </span>
+      </a>
+
+      <!-- Desktop links -->
+      <div style="display:flex; align-items:center; gap:12px;">
+        <ul class="nav-links" role="menubar" aria-label="Primary">
+          <li role="none"><a role="menuitem" href="#skills2-title">Skills</a></li>
+          <li role="none"><a role="menuitem" href="#projects">Projects</a></li>
+          <li role="none"><a role="menuitem" href="#about">About</a></li>
+          <li role="none"><a role="menuitem" href="#experience">experience</a></li>
+
+          <li role="none"><a role="menuitem" href="#contact" class="cta-ghost">Contact</a></li>
+        </ul>
+
+        <!-- Hamburger (mobile) -->
+        <button class="hamburger" id="hamburger" aria-controls="mobile-panel" aria-expanded="false" aria-label="Open menu">
+          <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="18" height="2" rx="1" fill="currentColor" />
+            <rect y="5" width="18" height="2" rx="1" fill="currentColor" />
+            <rect y="10" width="18" height="2" rx="1" fill="currentColor" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Mobile slide-in panel -->
+  <aside id="mobile-panel" class="mobile-panel" aria-hidden="true" tabindex="-1">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <div style="display:flex; gap:12px; align-items:center;">
+        
+        
+      </div>
+      <button class="close-btn" id="mobile-close" aria-label="Close menu">✕</button>
+    </div>
+
+    <nav aria-label="Mobile primary">
+      <div class="mobile-links">
+        <a href="#skills2-title" data-panel-link>Skills</a>
+        <a href="#projects" data-panel-link>Projects</a>
+       <a href="#about" data-panel-link>About</a>
+       <a href="#experience" data-panel-link>Experience</a>
+        <a href="#contact" class="cta-ghost" data-panel-link>Contact</a>
+      </div>
+    </nav>
+
+    
+  </aside>
+
+  <!-- CONTAINER -->
+  <main class="container" id="top">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="avatar-wrap" aria-hidden="false">
+        <img class="avatar" src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/profile.png" alt="Portrait — Ozaragaryan Floyd">
+      </div>
+
+      <div class="hero-info">
+        <h1 id="hero-heading">Hi — I'm <span style="color:var(--emerald)">Ryan Floyd P. Ozaraga</span></h1>
+        <p class="lead">Web Developer specializing in <strong>Shopify</strong>, <strong>WordPress</strong> and <strong>SEO</strong>. I build fast, accessible stores and sites that convert. <span class="skill-inline">HTML · CSS · JS · PHP · Liquid</span></p>
+
+        <div class="hero-ctas" role="group" aria-label="Primary actions">
+          <a class="btn-primary" href="#projects">View Projects</a>
+          <a class="btn-outline" href="mailto:your.email@example.com">Email Me</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="content-section" id="skills" aria-labelledby="skills-title">
+      <div class="section-head">
+        <h2 id="skills-title">Skills & Technologies</h2>
+        <div class="section-sub">Languages, tools, and technologies I use — from front-end design to back-end database management.</div>
+      </div>
+
+      <ul class="skills-list" aria-hidden="false">
+  <li title="HTML">🧩 HTML</li>
+  <li title="CSS">🎨 CSS</li>
+  <li title="JavaScript">⚡ JavaScript</li>
+  <li title="PHP">🐘 PHP</li>
+  <li title="MySQL">🗄️ MySQL</li>
+  <li title="Liquid">🧵 Liquid</li>
+  <li title="WordPress">🌐 WordPress</li>
+  <li title="Shopify">🛒 Shopify</li>
+  <li title="SEO">🔎 SEO</li>
+  <li title="PageSpeed">⏱ PageSpeed</li>
+</ul>
+
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="content-section" id="projects" aria-labelledby="projects-title">
+      <div class="section-head">
+        <h2 id="projects-title">Selected Projects</h2>
+        <div class="section-sub">Client & personal work — focused on e-commerce and conversion</div>
+      </div>
+
+      <div class="projects-grid" role="list">
+
+        <!-- Project 1 -->
+        <article class="project-card" role="listitem" aria-label="Border Sleep Therapy Solutions">
+          <div class="project-media">
+            <!-- Slider -->
+            <div class="slider" data-slider tabindex="0" aria-roledescription="carousel">
+              <div class="slides" aria-hidden="false">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/border1.png" alt="Border Sleep screenshot 1" class="is-active">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/border2.png" alt="Border Sleep screenshot 2">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/border3.png" alt="Border Sleep screenshot 3">
+              </div>
+
+              <!-- dots created by JS -->
+              <div class="slider-dots" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <h3 class="project-title">Border Sleep Therapy Solutions</h3>
+          <p class="project-desc">A professional sleep therapy e-commerce website built on Shopify. Custom theme development, advanced product filtering, SEO optimization and responsive UX for CPAP & sleep solutions buyers.</p>
+
+          <div class="project-tags" aria-hidden="false">
+            <span class="tag">Shopify</span>
+            <span class="tag">SEO</span>
+            <span class="tag">Liquid</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+
+          <div class="project-actions">
+            <a href="https://www.bordersleep.com/" target="_blank" rel="noopener noreferrer" aria-label="Open Border Sleep website">Visit Site ↗</a>
+          </div>
+        </article>
+
+ <!-- Project 2 -->
+        <article class="project-card" role="listitem" aria-label="Zen">
+          <div class="project-media">
+            <!-- Slider -->
+            <div class="slider" data-slider tabindex="0" aria-roledescription="carousel">
+              <div class="slides" aria-hidden="false">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/azen1.png" alt="Zen1" class="is-active">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/azen2.png" alt="Zen2">
+               
+              </div>
+
+              <!-- dots created by JS -->
+              <div class="slider-dots" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <h3 class="project-title">Zen Diamond UK</h3>
+          <p class="project-desc">An elegant jewelry e-commerce platform built on WordPress and WooCommerce. Custom theme design, high-end visual styling, SEO optimization, and mobile-first user experience.</p>
+
+          <div class="project-tags" aria-hidden="false">
+            <span class="tag">WordPress</span>
+            <span class="tag">SEO</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+
+          <div class="project-actions">
+            <a href="https://zen-diamond.co.uk/" target="_blank" rel="noopener noreferrer" aria-label="Open Border Sleep website">Visit Site ↗</a>
+          </div>
+        </article>
+
+
+        <!-- Project 3 -->
+        <article class="project-card" role="listitem" aria-label="Zen">
+          <div class="project-media">
+            <!-- Slider -->
+            <div class="slider" data-slider tabindex="0" aria-roledescription="carousel">
+              <div class="slides" aria-hidden="false">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/zen1.png" alt="Zen1" class="is-active">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/zen2.png" alt="Zen2">
+               
+              </div>
+
+              <!-- dots created by JS -->
+              <div class="slider-dots" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <h3 class="project-title">Zen Diamond UK</h3>
+          <p class="project-desc">An elegant jewelry e-commerce platform built on WordPress and WooCommerce. Custom theme design, high-end visual styling, SEO optimization, and mobile-first user experience.</p>
+
+          <div class="project-tags" aria-hidden="false">
+            <span class="tag">WordPress</span>
+            <span class="tag">SEO</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+
+          <div class="project-actions">
+            <a href="https://ia-international.com/zenuk/" target="_blank" rel="noopener noreferrer" aria-label="Open Border Sleep website">Visit Site ↗</a>
+          </div>
+        </article>
+
+        <!-- Project 4 -->
+        <article class="project-card" role="listitem" aria-label="Zen">
+          <div class="project-media">
+            <!-- Slider -->
+            <div class="slider" data-slider tabindex="0" aria-roledescription="carousel">
+              <div class="slides" aria-hidden="false">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/aroche1.png" alt="Zen1" class="is-active">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/aroche2.png" alt="Zen2">
+               
+              </div>
+
+              <!-- dots created by JS -->
+              <div class="slider-dots" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <h3 class="project-title">Roche Bianca Albania</h3>
+          <p class="project-desc">A stylish WooCommerce jewelry platform highlighting Roche Bianca’s finest silver and gold craftsmanship with a smooth, elegant user experience.</p>
+
+          <div class="project-tags" aria-hidden="false">
+            <span class="tag">WordPress</span>
+            <span class="tag">SEO</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+
+          <div class="project-actions">
+            <a href="https://rochebianca.al/" target="_blank" rel="noopener noreferrer" aria-label="Open Border Sleep website">Visit Site ↗</a>
+          </div>
+        </article>
+
+<!-- Project 5 -->
+        <article class="project-card" role="listitem" aria-label="Zen">
+          <div class="project-media">
+            <!-- Slider -->
+            <div class="slider" data-slider tabindex="0" aria-roledescription="carousel">
+              <div class="slides" aria-hidden="false">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/aroche3.png" alt="Zen1" class="is-active">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/aroche4.png" alt="Zen2">
+               
+              </div>
+
+              <!-- dots created by JS -->
+              <div class="slider-dots" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <h3 class="project-title">Roche Bianca Albania</h3>
+          <p class="project-desc">A stylish WooCommerce jewelry platform highlighting Roche Bianca’s finest silver and gold craftsmanship with a smooth, elegant user experience.</p>
+
+          <div class="project-tags" aria-hidden="false">
+            <span class="tag">WordPress</span>
+            <span class="tag">SEO</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+
+          <div class="project-actions">
+            <a href="https://rochebianca.com/" target="_blank" rel="noopener noreferrer" aria-label="Open Border Sleep website">Visit Site ↗</a>
+          </div>
+        </article>
+
+        <!-- Project 6 -->
+        <article class="project-card" role="listitem" aria-label="Zen">
+          <div class="project-media">
+            <!-- Slider -->
+            <div class="slider" data-slider tabindex="0" aria-roledescription="carousel">
+              <div class="slides" aria-hidden="false">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/Aborderdme.png" alt="Zen1" class="is-active">
+                <img src="https://raw.githubusercontent.com/ozaragaryanfloyd-rgb/portfolio-site/main/images/Aborderdme2.png" alt="Zen2">
+               
+              </div>
+
+              <!-- dots created by JS -->
+              <div class="slider-dots" aria-hidden="true"></div>
+            </div>
+          </div>
+
+         <h3 class="project-title">Border DME</h3>
+<p class="project-desc">
+  A blog site connected to the Border DME store, sharing medical insights and product guides.
+</p>
+
+  
+
+          <div class="project-tags" aria-hidden="false">
+            <span class="tag">WordPress</span>
+            <span class="tag">SEO</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+
+          <div class="project-actions">
+            <a href="https://borderdme.com/" target="_blank" rel="noopener noreferrer" aria-label="Open Border Sleep website">Visit Site ↗</a>
+          </div>
+        </article>
+
+        <!-- Empty placeholder (you mentioned you'll add more) -->
+      <!--   <div class="empty-state" role="listitem">
+          I will personally add more projects here soon! <br>
+          <small style="display:block; margin-top:8px; color:var(--muted)">(Showcase your best work to impress clients)</small>
+        </div>-->
+
+      </div>
+    </section>
+
+   <!-- ABOUT ME -->
+<section class="content-section" id="about" aria-labelledby="about-title">
+  <div class="section-head">
+    <h2 id="about-title">About Me</h2>
+    <div class="section-sub">Who I am & what drives me</div>
+  </div>
+
+  <div style="color:var(--muted); font-size:1rem; line-height:1.6;">
+    <p>
+  I’m a <strong>motivated and detail-oriented Web Developer</strong> with hands-on experience in <strong>Shopify</strong> and <strong>WordPress</strong> development. Skilled in creating <strong>responsive, dynamic, and user-focused websites</strong> using <strong>HTML, CSS, JavaScript</strong>, and <strong>Liquid</strong>. I leverage JavaScript and Liquid for <strong>data fetching</strong>, enhancing interactivity, and improving overall user experience.
+</p>
+<p>
+  I’m passionate about building <strong>fast, accessible, and SEO-optimized websites</strong>. I enjoy solving <strong>front-end performance challenges</strong>, developing <strong>dynamic Shopify product features</strong> with Liquid + JS, and collaborating with teams to boost <strong>engagement and conversions</strong>.
+</p>
+
+  </div>
+</section>
+
+ <!-- EXPERIENCE -->
+    <section class="content-section" id="experience" aria-labelledby="experience-title">
+      <div class="section-head">
+        <h2 id="experience-title">Experience</h2>
+        <div class="section-sub">Professional & internship roles</div>
+      </div>
+
+      <div style="display:grid; gap:16px;">
+        <div>
+          <h3 style="margin:0; color:#eafcf3; font-size:1rem; font-weight:700;">Freelance Website Designer / Developer</h3>
+          <div style="color:var(--muted); font-size:0.95rem; margin-bottom:8px;">Remote — 2023–Present</div>
+          <ul style="color:var(--muted); margin:0 0 12px 18px;">
+            <li>Developed and customized Shopify and WordPress websites focusing on functionality and performance.</li>
+            <li>Used JavaScript and Liquid for data fetching, enabling dynamic product displays and real-time content updates.</li>
+            <li>Built responsive front-end layouts using HTML, CSS, and JavaScript to ensure smooth user experiences across devices.</li>
+            <li>Optimized website loading speed using Google PageSpeed Insights and basic performance techniques.</li>
+            <li>Managed Shopify apps, plugin configurations, and theme customizations to meet client requirements.</li>
+            <li>Collaborated with clients to identify design needs and deliver customized web solutions on time.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 style="margin:0; color:#eafcf3; font-size:1rem; font-weight:700;">USTP Oroquieta Registrar's Office</h3>
+          <div style="color:var(--muted); font-size:0.95rem; margin-bottom:8px;">Internship — IT Support Specialist / Software Development Intern</div>
+          <ul style="color:var(--muted); margin:0 0 12px 18px;">
+            <li>Provided IT support and software assistance to staff and students.</li>
+            <li>Delivered customer service and technical troubleshooting.</li>
+            <li>Edited and managed official documents, spreadsheets, and files with accuracy and proper formatting.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+     <!-- EDUCATION -->
+    <section class="content-section" id="education" aria-labelledby="education-title">
+      <div class="section-head">
+        <h2 id="education-title">Education</h2>
+        <div class="section-sub">Academic background</div>
+      </div>
+
+      <div style="color:var(--muted); line-height:1.5;">
+        <strong>Misamis Occidental National High School</strong><br>
+        Senior High School — Information Communication Technology Track — 2019–2020
+        <br><br>
+        <strong>University of Science and Technology of Southern Philippines</strong><br>
+        Bachelor of Science in Information Technology — <em>Status: Graduate</em>
+      </div>
+    </section>
+
+
+    <!-- SKILLS (detailed list) -->
+    <section class="content-section" aria-labelledby="skills2-title">
+      <div class="section-head">
+        <h2 id="skills2-title">Detailed Skills</h2>
+        <div class="section-sub">Technical & soft skills</div>
+      </div>
+
+      <div style="display:grid; gap:12px; color:var(--muted);">
+        <ul style="margin:0 0 0 18px;">
+          <li><strong>Shopify Development:</strong> Theme customization, Liquid templates, app integrations, product filtering, performance tweaks.</li>
+          <li><strong>WordPress:</strong> Theme & plugin customization, WooCommerce setup, content management.</li>
+          <li><strong>Front-end:</strong> HTML, CSS, JavaScript — responsive design, cross-browser testing, accessibility basics.</li>
+          <li><strong>Dynamic Data:</strong> JavaScript & Liquid for data fetching to create dynamic product and content experiences.</li>
+          <li><strong>Performance & SEO:</strong> PageSpeed improvements, GTmetrix checks, basic on-page SEO best practices.</li>
+          <li><strong>Tools:</strong> Browser devtools, PageSpeed Insights, basic Git/Github workflow, Google Analytics (basic).</li>
+          <li><strong>Soft skills:</strong> Communication, teamwork, attention to detail, problem-solving, client communication for remote work.</li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- CONTACT -->
+  <section class="content-section" id="contact" aria-labelledby="contact-title">
+  <div class="section-head">
+    <h2 id="contact-title">
+      
+      Contact
+    </h2>
+    <div class="section-sub">
+      
+      Let's build something great
+    </div>
+  </div>
+
+  <div class="contact-card" role="region" aria-label="Contact information">
+    <div style="font-size:1.02rem; color:var(--muted)">
+      
+      Ready to collaborate or have a project in mind?
+    </div>
+
+    <a href="mailto:ozaragaryanfloyd@gmail.com" aria-label="Email Ozaragaryan Floyd" style="display:block; margin-top:8px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24" style="vertical-align:middle; margin-right:6px;">
+        <path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5z"/>
+      </svg>
+      ozaragaryanfloyd@gmail.com
+    </a>
+
+    <div style="font-size:0.92rem; color:var(--muted); margin-top:6px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24" style="vertical-align:middle; margin-right:6px;">
+        <path d="M6.62 10.79a15.46 15.46 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24 11.36 11.36 0 003.58.57 1 1 0 011 1v3.61a1 1 0 01-.91 1A17.93 17.93 0 014 6.91 1 1 0 015 6h3.61a1 1 0 011 1 11.36 11.36 0 00.57 3.58 1 1 0 01-.24 1.05l-2.32 2.16z"/>
+      </svg>
+      Phone: 0938 981 6274
+    </div>
+
+    <div style="font-size:0.92rem; color:var(--muted); margin-top:6px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24" style="vertical-align:middle; margin-right:6px;">
+        <path d="M12 2a8 8 0 00-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 00-8-8zm0 10.5a2.5 2.5 0 112.5-2.5A2.5 2.5 0 0112 12.5z"/>
+      </svg>
+      Location: Misamis Occidental, Philippines
+    </div>
+
+    
+  </div>
+</section>
+
+
+    <footer>
+      © <span id="year"></span> Ryan FLoyd P. Ozaraga — Built with care · <span style="color:var(--muted)">Fast • Accessible • SEO-minded</span>
+    </footer>
+  </main>
+
+  <!-- Scripts -->
+  <script>
+    /* -------------------------
+       Small helpers
+       ------------------------- */
+    (function() {
+      // Footer year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Smooth links (also close mobile panel when clicked)
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', (e)=>{
+          const href = a.getAttribute('href');
+          if(href.length > 1){
+            e.preventDefault();
+            const el = document.querySelector(href);
+            if(el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
+            // close mobile panel if open
+            closeMobilePanel();
+          }
+        });
+      });
+    })();
+
+    /* -------------------------
+       Mobile panel (slide-in)
+       ------------------------- */
+    (function() {
+      const hamburger = document.getElementById('hamburger');
+      const panel = document.getElementById('mobile-panel');
+      const closeBtn = document.getElementById('mobile-close');
+      const panelLinks = document.querySelectorAll('[data-panel-link]');
+
+      function openMobilePanel() {
+        panel.classList.add('open');
+        panel.setAttribute('aria-hidden', 'false');
+        hamburger.setAttribute('aria-expanded', 'true');
+        // trap focus
+        panel.focus();
+        document.body.style.overflow = 'hidden';
+      }
+      window.openMobilePanel = openMobilePanel;
+
+      function closeMobilePanel() {
+        panel.classList.remove('open');
+        panel.setAttribute('aria-hidden', 'true');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+      window.closeMobilePanel = closeMobilePanel;
+
+      hamburger.addEventListener('click', () => {
+        const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+        if (expanded) closeMobilePanel(); else openMobilePanel();
+      });
+      closeBtn.addEventListener('click', closeMobilePanel);
+
+      // close on escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMobilePanel();
+      });
+
+      // close when clicking links inside
+      panelLinks.forEach(l => l.addEventListener('click', closeMobilePanel));
+
+      // close when clicking outside the panel (on small screens)
+      document.addEventListener('click', (e) => {
+        if (!panel.contains(e.target) && !hamburger.contains(e.target) && panel.classList.contains('open')) {
+          closeMobilePanel();
+        }
+      });
+    })();
+
+    /* -------------------------
+       Lightweight slider
+       - fade transitions
+       - dots + keyboard nav + pause on hover
+       ------------------------- */
+    (function() {
+      const sliders = document.querySelectorAll('[data-slider]');
+
+      sliders.forEach(slider => {
+        const slidesWrap = slider.querySelector('.slides');
+        const slides = Array.from(slidesWrap.querySelectorAll('img'));
+        const dotsWrap = slider.querySelector('.slider-dots');
+        if(!slides.length) return;
+
+        let idx = 0;
+        let timer = null;
+        const interval = 3000;
+
+        // build dots
+        slides.forEach((_, i)=>{
+          const dot = document.createElement('button');
+          dot.className = 'dot' + (i===0 ? ' is-active' : '');
+          dot.setAttribute('aria-label','Go to slide ' + (i+1));
+          dot.addEventListener('click', ()=> show(i));
+          dotsWrap.appendChild(dot);
+        });
+        const dots = Array.from(dotsWrap.children);
+
+        function show(n){
+          slides.forEach((s,i)=>{
+            s.classList.toggle('is-active', i===n);
+            s.setAttribute('aria-hidden', i===n ? 'false' : 'true');
+            dots[i].classList.toggle('is-active', i===n);
+          });
+          idx = n;
+        }
+
+        function next(){
+          show((idx+1) % slides.length);
+        }
+
+        function start(){
+          stop();
+          timer = setInterval(next, interval);
+        }
+        function stop(){
+          if(timer) { clearInterval(timer); timer = null; }
+        }
+
+        // pause on hover/focus
+        slider.addEventListener('mouseenter', stop);
+        slider.addEventListener('mouseleave', start);
+        slider.addEventListener('focusin', stop);
+        slider.addEventListener('focusout', start);
+
+        // keyboard navigation
+        slider.addEventListener('keydown', (e)=>{
+          if(e.key === 'ArrowLeft'){ show((idx-1+slides.length)%slides.length); }
+          if(e.key === 'ArrowRight'){ show((idx+1)%slides.length); }
+        });
+
+        // init
+        show(0);
+        start();
+
+        // Respect reduced motion preference
+        const rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if(rm.matches) stop();
+      });
+    })();
+  </script>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('a[href="#skills2-title"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+
+      const target = document.querySelector('#skills2-title');
+      if (!target) return;
+
+      const nav = document.querySelector('nav');
+      const navHeight = nav ? nav.offsetHeight : 0;
+      const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+
+      // Slight positive offset prevents overscroll
+      window.scrollTo({
+        top: targetPosition - navHeight + -20,
+        behavior: 'smooth'
+      });
+    });
+  });
+});
+</script>
+
+</body>
+</html>
+
+
   <meta name="description" content="Ryan FLOYD Ozaraga — Shopify, WordPress & SEO focused Web Developer. Portfolio showcasing projects and skills." />
 
   <style>
@@ -1447,6 +2898,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
 
 
